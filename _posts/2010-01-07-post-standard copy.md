@@ -1,7 +1,6 @@
 ---
 title: "Post: Copy of Standard"
 excerpt_separator: "<!--more-->"
-classes: wide
 categories:
   - Blog
 tags:
