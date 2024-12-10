@@ -53,7 +53,7 @@ create, duplicate, share it very easily.
 Here is the Vagrant File
 
 ```yaml
-cat Vagrantfile 
+cat <<EOF >> Vagrantfile
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -74,6 +74,7 @@ Vagrant.configure("2") do |config|
     vb.name = "Container Networking Demo"
   end
 end
+EOF
 ```
 
 Create a directory ```shared-with-vm``` in the same location where 
@@ -105,6 +106,12 @@ Last thing (optional), you can set the aliases. I do this [way](https://hackerno
 vagrant@cnd:~$ wget https://raw.githubusercontent.com/simplyatul/bin/master/setaliases.sh
 vagrant@cnd:~$ source setaliases.sh 
 ```
+I have modified the PS1 as below
+
+```bash
+export PS1='\[\e[96m\][\[\e[38;5;226m\]\u\[\e[93m\]@\h\[\e[96m\]]\[\e[0m\] \[\e[96m\][\[\e[0m\]\w\[\e[96m\]]\[\e[0m\]# '
+```
+
 
 All set, let us jump to Part One.
 
