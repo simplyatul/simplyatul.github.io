@@ -66,7 +66,7 @@ Following diagram helps to visualize the setup
 For brevity, I will not list ```lo``` and ```enp0s3``` interfaces in rest of 
 the diagrams.
 
-Now, let's create ```veth``` pairs
+Now, let's create a ```veth``` pair
 
 ```bash
 sudo ip link add vethX type veth peer name vethY
@@ -76,7 +76,7 @@ sudo ip link set vethY up
 
 ![cnd-1](https://github.com/simplyatul/simplyatul.github.io/blob/master/assets/images/cnd-2.png?raw=true)
 
-Attach one of the ```veth``` pair to ```ns1``` namespace.
+Attach one end of the ```veth``` pair to ```ns1``` namespace.
 
 ```bash
 sudo ip link set vethX netns ns1
@@ -89,16 +89,26 @@ interface
 
 ```bash
 ip link
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 02:fd:4d:34:55:76 brd ff:ff:ff:ff:ff:ff
+18: vethY@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether 5a:bc:4d:7e:76:b1 brd ff:ff:ff:ff:ff:ff link-netns ns1
 ```
 
 And processes in ```ns1``` namespace could not see ```vethY``` interface.
 
 ```bash
 sudo ip netns exec ns1 ip link
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+19: vethX@if18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether 5e:4b:13:90:7d:63 brd ff:ff:ff:ff:ff:ff link-netnsid 0
 ```
 
-In similar fashion, we can create another namespace and create, attach new 
-pair of ```veth``` interface.
+In similar fashion, we can create another namespace. Create a new ```veth``` 
+pair. And then attach one end of ```veth``` pair to a namespace.
 
 ```bash
 sudo ip netns add ns2
@@ -124,7 +134,7 @@ sudo ip link set vethQ master br0
 ![cnd-1](https://github.com/simplyatul/simplyatul.github.io/blob/master/assets/images/cnd-5.png?raw=true)
 
 As we have looked in [last blog post](https://simplyatul.github.io/blog/Container-Networking-Part1/), any packet on bridge ```br0``` is seen on 
-all the ```veths``` we have created. You can try on yourself.
+all the ```veths``` we have created. You can try it on yourself.
 
 Now by this time, you might have started imagining how a container achieves the network isolation using Virtual Ethernet, Bridge and Linux Namespaces. We will take a 
 look at docker container in [next blog post](https://simplyatul.github.io/blog/Container-Networking-Part3/).

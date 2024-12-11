@@ -35,12 +35,10 @@ physical network device in another namespace, but can also be
 used as standalone network devices.
 ```
 
-We will see namespaces and bridges later, but let us see how we create ```veth``` 
-and their usage.
+We will see namespaces and bridges later, but let us see how we can create 
+```veth``` interface(s) and their usage.
 
 ## Creating veth pair
-
-The command is 
 
 ```bash
 sudo ip link add vethX type veth peer name vethY
@@ -77,8 +75,7 @@ ip link
     link/ether 5e:4b:13:90:7d:63 brd ff:ff:ff:ff:ff:ff
 
 ```
-
-The specialty of ```veth``` pair is packets transmitted on one device in the 
+The ```veth``` pair is very special. Packets transmitted on one device in the 
 pair are immediately received on the other device.
 
 ## Traffic on veth pair
@@ -178,7 +175,7 @@ Sent 1 packets.
 
 ```
 
-On the ```tshark``` window, you will see the same packet has received
+On the ```tshark``` window, you will see the packet has received.
 
 ```bash
 sudo tshark -T fields -e eth -i vethY
@@ -192,7 +189,7 @@ Ethernet II, Src: 22:11:11:11:11:11 (22:11:11:11:11:11), Dst: 22:22:22:22:22:22 
 ```
 
 The ```veth``` pairs play the critical role establishing Container Networking. 
-We will see in next part of the blog.
+We will see it in [next part](https://simplyatul.github.io/blog/Container-Networking-Part2/) of the blog.
 
 ## More on veth
 
