@@ -12,21 +12,21 @@ tags:
 ---
 
 # Intro...
-My first encounter with Container was - I had performed load testing on an 
+My first encounter with container was - I had performed load testing on an 
 application using [JMeter][1]. So rather installing [JMeter][1] on multiple 
-Virtual Machines (VMs), I ended deploying them on multiple Containers on a single VM.
+Virtual Machines (VMs), I ended deploying them on multiple containers on a single VM.
 
-I still remember, I was curious to understand how a Container can 
-manage to keep applications isolated. I was interested understanding 
-networking part more specifically.
+I still remember, I was curious to understand how a container can 
+manage to keep applications isolated. I was interested in understanding 
+networking part specifically.
 
 When I searched, lot of terms coined around. Like [veth](https://man7.org/linux/man-pages/man4/veth.4.html), [bridges](https://en.wikipedia.org/wiki/Network_bridge), 
 [Linux Namespaces](https://en.wikipedia.org/wiki/Linux_namespaces), [cgroups](https://en.wikipedia.org/wiki/Cgroups). I had lot of queries in my mind too.
 
 
-- How a network packet traverse from Host to Container and vice-versa?
-- How Container maintains separate network space for themselves?
-- Post installing docker, I see ```docker0``` device in ```$ ip a``` command output. What is it's use?
+- How a network packet traverse from Host to container and vice-versa?
+- How container maintains separate network space for themselves?
+- Post installing docker, I see ```docker0``` device in ```ip a``` command output. What is its use?
 - Post creating container, I see ```eth0@if5``` device in container, whereas ```veth6e6a37e@if4``` device on Host. Are they related to ```docker0``` device?
 - And many more...
 
@@ -40,9 +40,9 @@ Containerization on a high level.
 
 I have broken down this blog post in following parts
 
-1. [Part One]((https://simplyatul.github.io/blog/Container-Networking-Part1/)): Virtual Ethernet and Network Bridges
-2. [Part Two](https://simplyatul.github.io/blog/Container-Networking-Part2/): Network Namespaces
-3. [Part Three](https://simplyatul.github.io/blog/Container-Networking-Part3/): Container Networking
+1. [Part One](https://simplyatul.github.io/blog/Container-Networking-Part1/): Virtual Ethernet
+2. [Part Two](https://simplyatul.github.io/blog/Container-Networking-Part2/): Network Namespaces and Network Bridges
+3. [Part Three](https://simplyatul.github.io/blog/Container-Networking-Part3/): Container (docker) Networking
 
 # Setup
 
@@ -100,19 +100,14 @@ vagrant@cnd:~$ sudo apt install -y net-tools vim curl git tree traceroute make d
 vagrant@cnd:~$ systemctl restart networkd-dispatcher.service unattended-upgrades.service
 ```
 
-Last thing (optional), you can set the aliases. I do this [way](https://hackernoon.com/bash-aliases-take-them-with-you).
+Last thing (optional, just to advertize my older blog post 
+:stuck_out_tongue_winking_eye:), you can set the aliases. I do 
+this [way](https://hackernoon.com/bash-aliases-take-them-with-you).
 
 ```bash
 vagrant@cnd:~$ wget https://raw.githubusercontent.com/simplyatul/bin/master/setaliases.sh
 vagrant@cnd:~$ source setaliases.sh 
 ```
-I have modified the PS1 as below
-
-```bash
-export PS1='\[\e[96m\][\[\e[38;5;226m\]\u\[\e[93m\]@\h\[\e[96m\]]\[\e[0m\] \[\e[96m\][\[\e[0m\]\w\[\e[96m\]]\[\e[0m\]# '
-```
-
-
-All set, let us jump to Part One.
+All set, let us jump to [Part One](https://simplyatul.github.io/blog/Container-Networking-Part1/).
 
 [1]: https://jmeter.apache.org/
