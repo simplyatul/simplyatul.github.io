@@ -61,7 +61,11 @@ $ sudo ip netns exec ns1 ip link
 ```
 Following diagram helps to visualize the setup
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/cnd-1.png" alt="">
+![cnd-1](https://github.com/simplyatul/simplyatul.github.io/blob/master/assets/images/cnd-1.png?raw=true)
+
+Another image 
+
+<img src="/assets/images/cnd-1.png" title="cnd-1" style="height: 400px; width:800px;"/>
 
 ### TODO DIAGRAM 1
 
