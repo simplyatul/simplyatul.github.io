@@ -1,5 +1,5 @@
 ---
-title: "Container Networking: Part One"
+title: "Container Networking: Part Two"
 author_profile: false
 classes: wide
 categories:
@@ -61,7 +61,7 @@ $ sudo ip netns exec ns1 ip link
 ```
 Following diagram helps to visualize the setup
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/cnd-1.jpg" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/cnd-1.png" alt="">
 
 ### TODO DIAGRAM 1
 
