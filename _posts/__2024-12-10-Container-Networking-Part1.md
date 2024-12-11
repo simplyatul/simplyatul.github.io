@@ -135,7 +135,7 @@ Capturing on 'vethY'
 Now run the following python code to send the single packet to ```vethX``` device
 
 ```bash
-[vagrant@cnd] [~]# sudo python3 ./onepkt.py 22:11:11:11:11:11 22:22:22:22:22:22 vethX 123                                                                                              
+[vagrant@cnd] [~]# sudo python3 ./onepkt.py 22:11:11:11:11:11 22:22:22:22:22:22 vethX 123
 ###[ Ethernet ]###
   dst       = 22:22:22:22:22:22
   src       = 22:11:11:11:11:11

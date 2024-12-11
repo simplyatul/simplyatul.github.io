@@ -61,14 +61,16 @@ $ sudo ip netns exec ns1 ip link
 ```
 Following diagram helps to visualize the setup
 
-### TODO DIAGRAM
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/cnd-1.jpg" alt="">
+
+### TODO DIAGRAM 1
 
 For brevity, I will not list ```lo``` and ```enp0s3``` host interfaces in the 
 rest of the diagrams.
 
 Now, let's create veth pairs
 
-### TODO DIAGRAM
+### TODO DIAGRAM 2
 
 ```bash
 $ sudo ip link add vethX type veth peer name vethY
@@ -76,9 +78,15 @@ $ sudo ip link set vethX up
 $ sudo ip link set vethY up
 ```
 
-Attach one of the ```veth``` pair to ```ns```` namespace.
+Attach one of the ```veth``` pair to ```ns1``` namespace.
 
-Notice the processes in the default/root namespace could not see ```vethX``` 
+```bash
+$ sudo ip link set vethX netns ns1
+```
+
+### TODO DIAGRAM 3
+
+Notice that processes in the default/root namespace could not see ```vethX``` 
 interface 
 
 ```bash
@@ -92,15 +100,51 @@ interface.
 $ sudo ip netns exec ns1 ip link
 ```
 
-Now in similar fashion, we can create another namespaces and attach another pair 
-of ```veth``` interfaces as below.
+In similar fashion, we can create another namespaces and attach another pair 
+of ```veth``` interfaces. It looks as
 
-### TODO DIAGRAM
+### TODO DIAGRAM 4
 
+
+```bash
+$ sudo ip netns add ns2
+$ sudo ip link add vethP type veth peer name vethQ
+$ sudo ip link set vethP up
+$ sudo ip link set vethQ up
+$ sudo ip link set vethP netns ns2
+```
+
+Now the last part is connect these two namespaces with Bridge.
+
+Bridge connects two LAN segments together. We will create a new bridge and 
+attach ```vethY``` and ```vethQ``` to this bridge.
+
+### TODO DIAGRAM 5
+
+As we looked in last blog post, any packet on bridge ```br0``` is seen on 
+all the ```veths``` we have created.
+
+```bash
+$ cat <<EOF >> bridge.sh
+#!/bin/bash
+
+ip link add name br0 type bridge
+ip link set dev br0 up
+ip link set vethY master br0
+ip link set vethQ master br0
+EOF
+
+$ chmod +x bridge.sh
+
+$ sudo ./bridge.sh
+```
+
+## Clean up
 
 ```bash
 
 ```
+### BACKUP
 
 Now you might have started imagining how a container achieves the application 
 isolation. It will get clarified soon.
@@ -108,7 +152,7 @@ isolation. It will get clarified soon.
 Also you might already thought that we can connect two namespaces as well.
 And yes, you are correct. It looks something like below diagram
 
-### TODO DIAGRAM
+
 
 Here are the commands
 
