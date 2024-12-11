@@ -40,9 +40,9 @@ Containerization on a high level.
 
 I have broken down this blog post in following parts
 
-1. Part One: Virtual Ethernet and Network Bridges
-2. Part Two: Network Namespaces
-3. Part Three: Container Networking
+1. [Part One]((https://simplyatul.github.io/blog/Container-Networking-Part1/)): Virtual Ethernet and Network Bridges
+2. [Part Two](https://simplyatul.github.io/blog/Container-Networking-Part2/): Network Namespaces
+3. [Part Three](https://simplyatul.github.io/blog/Container-Networking-Part3/): Container Networking
 
 # Setup
 
