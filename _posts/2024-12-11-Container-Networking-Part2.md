@@ -123,10 +123,20 @@ sudo ip link set vethQ master br0
 
 ![cnd-1](https://github.com/simplyatul/simplyatul.github.io/blob/master/assets/images/cnd-5.png?raw=true)
 
-As we looked in last [blog post](https://simplyatul.github.io/blog/Container-Networking-Part1/), any packet on bridge ```br0``` is seen on 
+As we have looked in [last blog post](https://simplyatul.github.io/blog/Container-Networking-Part1/), any packet on bridge ```br0``` is seen on 
 all the ```veths``` we have created. You can try on yourself.
 
-Now by this time, you might have started imagining how a container achieves the network isolation using Virtual Ethernet, Bridge and Linux Namespaces. 
+Now by this time, you might have started imagining how a container achieves the network isolation using Virtual Ethernet, Bridge and Linux Namespaces. We will take a 
+look at docker container in [next blog post](https://simplyatul.github.io/blog/Container-Networking-Part3/).
 
+Before you jump, let's clean up the setup
+
+```bash
+sudo ip link del br0
+sudo ip link del vethY
+sudo ip link del vethQ
+sudo ip netns del ns1
+sudo ip netns del ns2
+```
 
 [1]: https://en.wikipedia.org/wiki/Linux_namespaces
