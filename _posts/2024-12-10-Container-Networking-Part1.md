@@ -17,7 +17,7 @@ I will cover Virtual ethernet devices in this blog post.
 Generally, any machine has loopback and ethernet network interfaces. You can check the available interfaces using
 
 ```bash
-[vagrant@cnd] [~]# ip link
+ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
@@ -44,8 +44,10 @@ The command is
 
 ```bash
 sudo ip link add vethX type veth peer name vethY
+```
 
-[vagrant@cnd] [~]# ip link
+```bash
+ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
@@ -59,10 +61,12 @@ sudo ip link add vethX type veth peer name vethY
 By default, they are down. You need to make them up
 
 ```bash
-$ sudo ip link set vethX up
-$ sudo ip link set vethY up
+sudo ip link set vethX up
+sudo ip link set vethY up
+```
 
-[vagrant@cnd] [~]# ip link
+```bash
+ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
@@ -124,7 +128,7 @@ Code Credits: https://github.com/eric-keller/npp-linux-01-intro/blob/main/demo3/
 In one terminal window, start the ```tshark``` on ```vethY```
 
 ```bash
-[vagrant@cnd] [/shared-with-host]# sudo tshark -T fields -e eth -i vethY
+sudo tshark -T fields -e eth -i vethY
 Running as user "root" and group "root". This could be dangerous.
 Capturing on 'vethY'
  ** (tshark:9349) 10:26:21.105768 [Main MESSAGE] -- Capture started.
@@ -135,7 +139,7 @@ Capturing on 'vethY'
 Now run the following python code to send the single packet to ```vethX``` device
 
 ```bash
-[vagrant@cnd] [~]# sudo python3 ./onepkt.py 22:11:11:11:11:11 22:22:22:22:22:22 vethX 123
+sudo python3 ./onepkt.py 22:11:11:11:11:11 22:22:22:22:22:22 vethX 123
 ###[ Ethernet ]###
   dst       = 22:22:22:22:22:22
   src       = 22:11:11:11:11:11
@@ -177,7 +181,7 @@ Sent 1 packets.
 On the ```tshark``` window, you will see the same packet has received
 
 ```bash
-[vagrant@cnd] [/shared-with-host]# sudo tshark -T fields -e eth -i vethY
+sudo tshark -T fields -e eth -i vethY
 Running as user "root" and group "root". This could be dangerous.
 Capturing on 'vethY'
  ** (tshark:9349) 10:26:21.105768 [Main MESSAGE] -- Capture started.
@@ -197,14 +201,14 @@ identify the peer? ```ethtool``` utility comes to rescue. ```ethtool``` tells
 us the peer's index.
 
 ```bash
-[vagrant@cnd] [~]# ethtool -S vethX | grep peer
+ethtool -S vethX | grep peer
      peer_ifindex: 3
 ```
 ```peer_ifindex: 3``` indicates index of peer device. The index is show in 
 ```ip a``` command.
 
 ```bash
-[vagrant@cnd] [~]# ip link
+ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
@@ -222,7 +226,7 @@ are not that straight forward.
 You can get detailed, prettier information of a ```veth``` device using
 
 ```bash
-[vagrant@cnd] [~]# ip -d -j -p link show vethX
+ip -d -j -p link show vethX
 [ {
         "ifindex": 4,
         "link": "vethY",
@@ -252,5 +256,5 @@ You can get detailed, prettier information of a ```veth``` device using
 
 ```
 
-With this, we come to an end of this blog post. Next in the series is Network 
-Namespaces and Bridges
+With this, we come to an end of this blog post. Next in the series is [Network 
+Namespaces and Bridges](https://simplyatul.github.io/blog/Container-Networking-Part2/)
