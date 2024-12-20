@@ -1,5 +1,6 @@
 ---
-title: "Building Linux Kernel 6.x"
+title: "A Guide to Building Linux Kernel 6.x"
+last_modified_at: 2024-12-20T18:55:00+05:30
 author_profile: false
 classes: wide
 categories:
@@ -12,8 +13,9 @@ tags:
   - ubuntu
 ---
 
-In this blog post, I will list down the steps how to build the Linux Kernel.
-And then how to boot from the newly built kernel.
+This blog post provides a step-by-step tutorial on compiling and booting from 
+Linux Kernel 6.x. We will use a virtual environment for safety. This blog 
+post is ideal for developers and curious learners.
 
 I assume reader has basic understanding of Linux OS.
 
@@ -166,6 +168,9 @@ uname -r
 uname -a
 Linux kernel0 6.8.12-at-bld0 #2 SMP PREEMPT_DYNAMIC Tue Dec 17 16:56:45 IST 2024 x86_64 x86_64 x86_64 GNU/Linux
 ```
+Note the version number ```6.8.12-at-bld0``` has suffix ```-at-bld0``` which 
+we had entered during kernel code config step above. Every time you build 
+the new kernel, ensure to update this suffix.
 
 ## Notes
 - I used ```-4``` option in few of the commands above. This instruct to use IPv4. This is because I was facing few issues with IPv6.
