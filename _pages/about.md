@@ -11,4 +11,4 @@ You can reach out to me via the following methods:
 - [**LinkedIn**](https://www.linkedin.com/in/atul-thosar/)
 - [**Twitter**](https://twitter.com/thosar_atul)
 
-
+Here is the link to my [CV](https://simplyatul.github.io/cv/).
