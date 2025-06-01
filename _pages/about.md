@@ -3,7 +3,7 @@ permalink: /about/
 title: "About"
 ---
 
-Hi, This is Atul Thosar. I am a Software Engineer.
+Hi, This is Atul Thosar. I am a Software Engineer. I am based in India.
 
 You can reach out to me via the following methods:
 
